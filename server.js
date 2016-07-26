@@ -21,7 +21,7 @@ app.get('/',function(req,res){
 });
 
 app.get('/about',middleware.requestAuth,function(req,res){
-	res.send('About Us!');
+	res.send('About Us....');
 });
 
 app.use(express.static(__dirname+'/public'));
