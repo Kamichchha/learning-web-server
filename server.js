@@ -1,0 +1,32 @@
+var express=require('express');
+var app=express();
+var PORT=3000;
+
+
+var middleware={
+	requestAuth:function(req,res,next){
+		console.log('Route accessed');
+		next();
+	},
+	logger:function(req,res,next){
+		console.log('Request : ' + req.method + ' ' + req.originalUrl + ' at ' + new Date().toString());
+		next();
+	}
+}
+
+app.use(middleware.logger);
+
+app.get('/',function(req,res){
+	res.send('Hello Express!');
+});
+
+app.get('/about',middleware.requestAuth,function(req,res){
+	res.send('About Us!');
+});
+
+app.use(express.static(__dirname+'/public'));
+
+app.listen(PORT,function(){
+	console.log('Server started on port : ' + PORT);
+});
+
