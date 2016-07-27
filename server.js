@@ -1,18 +1,7 @@
 var express=require('express');
 var app=express();
+var middleware=require('./middleware');
 var PORT=3000;
-
-
-var middleware={
-	requestAuth:function(req,res,next){
-		console.log('Route accessed');
-		next();
-	},
-	logger:function(req,res,next){
-		console.log('Request : ' + req.method + ' ' + req.originalUrl + ' at ' + new Date().toString());
-		next();
-	}
-}
 
 app.use(middleware.logger);
 
